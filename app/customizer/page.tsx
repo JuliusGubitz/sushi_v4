@@ -49,9 +49,17 @@ export default function CustomizerPage() {
 
   // Editor erst nach Client-Mount rendern
   const [editorReady, setEditorReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setEditorReady(true);
+  }, []);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   // Navigate to contact form with design data (uploadedImage ist bereits Data-URL seit Upload)
@@ -130,6 +138,28 @@ export default function CustomizerPage() {
   const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   }, []);
+
+  // Mobile: Hinweis anzeigen, Customizer nicht unterstützt
+  if (isMobile) {
+    return (
+      <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-background">
+        <div className="max-w-md text-center space-y-6">
+          <h1 className="text-2xl font-bold text-foreground">Konfigurator</h1>
+          <p className="text-muted-foreground">
+            Der Konfigurator funktioniert am besten auf dem Computer oder Tablet. Bitte öffnen Sie die Seite auf einem größeren Gerät für die beste Erfahrung.
+          </p>
+          <div className="flex flex-col gap-3">
+            <Button asChild>
+              <Link href="/">Zur Startseite</Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link href="/anfrage">Direkt Anfrage senden</Link>
+            </Button>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <>
@@ -348,17 +378,6 @@ export default function CustomizerPage() {
               </div>
             </div>
 
-            {/* Tip Box */}
-            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
-              <div className="flex gap-3">
-                <Info className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-sm text-foreground">
-                    <span className="font-semibold">Info:</span> Es handelt sich lediglich um ein vereinfachtes 3D-Modell. Beim echten Produkt ist der Strohhalm an der Tube befestigt und lässt sich von unten in die Tube einführen, um das Sushi nach oben zu drücken.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </aside>
 
@@ -470,7 +489,7 @@ export default function CustomizerPage() {
             </Card>
 
             {/* Actions */}
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               <Button className="w-full" size="lg" onClick={handleAnfrageClick}>
                 Anfrage senden
               </Button>
@@ -479,6 +498,18 @@ export default function CustomizerPage() {
                   Vorlage downloaden
                 </Button>
               </a>
+            </div>
+
+            {/* Info Box */}
+            <div className="bg-accent/10 border border-accent/20 rounded-lg p-4">
+              <div className="flex gap-3">
+                <Info className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm text-foreground">
+                    <span className="font-semibold">Info:</span> Wir helfen Ihnen natürlich beim finalen Design. Hier können Sie schon einen ersten Blick auf Ihr individuelles Produkt werfen.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </aside>

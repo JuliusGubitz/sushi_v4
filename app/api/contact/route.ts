@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const CONTACT_EMAIL = "info@society-outsiders.com";
+const CONTACT_EMAIL = "info@popupsu-shi.de";
 
 // Resend Free Tier: Absender muss onboarding@resend.dev sein (noreply@resend.dev funktioniert nicht)
 const RESEND_FROM = "Push Up Sushi <onboarding@resend.dev>";
