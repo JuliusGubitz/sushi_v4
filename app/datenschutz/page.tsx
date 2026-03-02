@@ -7,8 +7,8 @@ export default function DatenschutzPage() {
         </h1>
 
         <div className="prose prose-neutral dark:prose-invert max-w-none">
-          <p className="text-muted-foreground">
-            Fügen Sie hier Ihre Datenschutzerklärung ein.
+          <p>
+            Hallo
           </p>
         </div>
       </div>
