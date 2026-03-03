@@ -22,12 +22,25 @@ const bebasNeue = Bebas_Neue({
 });
 
 export const metadata: Metadata = {
-  title: 'Push Up Sushi | Premium B2B Event-Catering',
-  description: 'Das innovative Event-Catering für Ihre Marke. Vollständig individualisierbar, Made in Germany.',
+  title: 'Push Up Sushi | Jetzt Customizen und Anfragen',
+  description: 'Die innovative Sushi To-Go Verpackung jetzt für den Frühling bestellen. Made for you.',
   generator: 'v0.app',
   icons: {
     icon: '/icon.png',
     apple: '/apple-icon.png',
+  },
+  openGraph: {
+    title: 'Push Up Sushi | Jetzt Customizen und Anfragen',
+    description: 'Die innovative Sushi To-Go Verpackung jetzt für den Frühling bestellen. Made for you.',
+    url: 'https://www.popupsu-shi.de',
+    siteName: 'Push Up Sushi',
+    images: [{ url: 'https://www.popupsu-shi.de/icon.png', width: 512, height: 512 }],
+    locale: 'de_DE',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Push Up Sushi | Jetzt Customizen und Anfragen',
+    description: 'Die innovative Sushi To-Go Verpackung jetzt für den Frühling bestellen. Made for you.',
   },
 }
 
