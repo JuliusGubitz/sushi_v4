@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Inter, Bebas_Neue } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { ConditionalHeader } from "@/components/conditional-header"
 import { ConditionalFooter } from "@/components/conditional-footer"
 import { PasswordGate } from "@/components/password-gate"
@@ -43,6 +44,7 @@ export default function RootLayout({
           {children}
           <ConditionalFooter />
           <Analytics />
+          <SpeedInsights />
         </PasswordGate>
       </body>
     </html>
