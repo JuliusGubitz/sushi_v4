@@ -1,5 +1,6 @@
 import { HeroSection } from "@/components/landing/hero-section";
 import { ProductSection } from "@/components/landing/product-section";
+import { MaterialsHighlightSection } from "@/components/landing/materials-highlight-section";
 import { TrustSection } from "@/components/landing/trust-section";
 import { StepsSection } from "@/components/landing/steps-section";
 import { PricingSection } from "@/components/landing/pricing-section";
@@ -11,6 +12,7 @@ export default function Home() {
       <HeroSection />
       <ProductSection />
       <TrustSection />
+      <MaterialsHighlightSection />
       <StepsSection />
       <PricingSection />
       <ChainsSection />

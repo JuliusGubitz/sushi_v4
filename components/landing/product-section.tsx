@@ -34,7 +34,6 @@ const features = [
     title: "Materialien",
     description:
       "Die Tube besteht aus Karton-Alu-Verbund, die Deckel aus PE und der Strohhalm sowie Stopfen aus PP. Alle Komponenten sind lebensmittelecht. Alle Materialien wurden nach EU-Standards getestet, Testunterlagen liegen vor.",
-    fullWidth: true,
   },
 ];
 
@@ -56,7 +55,7 @@ export function ProductSection() {
           <div className="relative flex justify-center">
             <div className="relative flex flex-col items-center">
               {/* Height dimension (220mm) - left of sketch */}
-              <div className="absolute -left-12 top-0 bottom-8 flex flex-col items-center" style={{ height: "18rem" }}>
+              <div className="absolute -left-14 top-0 bottom-8 flex flex-col items-center" style={{ height: "26rem" }}>
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3 h-px bg-border" />
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-px bg-border" />
                 <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-border" />
@@ -68,20 +67,20 @@ export function ProductSection() {
               {/* Product sketch - Two cylinders */}
               <div className="relative flex items-end justify-center gap-3 pt-0 pb-2">
                 {/* Transparent straw tube (left) */}
-                <div className="flex flex-col items-center" style={{ height: "18rem" }}>
-                  <div className="w-3 h-2 flex-shrink-0 rounded-t-full border border-border bg-muted/40" />
-                  <div className="w-2 flex-1 min-h-0 rounded-sm border border-border bg-muted/20" />
-                  <div className="w-3 h-2 flex-shrink-0 rounded-b-full border border-border bg-muted/40" />
+                <div className="flex flex-col items-center" style={{ height: "26rem" }}>
+                  <div className="w-4 h-3 flex-shrink-0 rounded-t-full border border-border bg-muted/40" />
+                  <div className="w-3 flex-1 min-h-0 rounded-sm border border-border bg-muted/20" />
+                  <div className="w-4 h-3 flex-shrink-0 rounded-b-full border border-border bg-muted/40" />
                 </div>
                 {/* Main cylinder */}
-                <div className="relative" style={{ height: "18rem" }}>
-                  <div className="w-14 h-full rounded-full border-2 border-border bg-card shadow-lg flex items-center justify-center overflow-hidden">
-                    <span className="text-[9px] text-muted-foreground tracking-wider uppercase -rotate-90 whitespace-nowrap">
+                <div className="relative" style={{ height: "26rem" }}>
+                  <div className="w-20 h-full rounded-full border-2 border-border bg-card shadow-lg flex items-center justify-center overflow-hidden">
+                    <span className="text-[10px] text-muted-foreground tracking-wider uppercase -rotate-90 whitespace-nowrap">
                       individuell bedruckbar
                     </span>
                   </div>
                   {/* Width dimension (50mm) - under main cylinder only */}
-                  <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center" style={{ width: "3.5rem" }}>
+                  <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center" style={{ width: "5rem" }}>
                     <div className="w-full h-px bg-border" />
                     <div className="absolute top-0 left-0 h-3 w-px bg-border" />
                     <div className="absolute top-0 right-0 h-3 w-px bg-border" />
@@ -94,7 +93,7 @@ export function ProductSection() {
 
           {/* Features List */}
           <div className="space-y-10">
-            {features.filter((f) => !f.fullWidth).map((feature) => (
+            {features.map((feature) => (
               <div key={feature.title} className="flex gap-6">
                 <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-foreground flex items-center justify-center">
                   <feature.icon className="w-6 h-6 text-primary-foreground" />
@@ -117,22 +116,6 @@ export function ProductSection() {
           </div>
         </div>
 
-        {/* Materialien - full width */}
-        <div className="mt-16 lg:mt-20 pt-12 border-t border-border">
-          <div className="flex gap-6 w-full">
-            <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-foreground flex items-center justify-center">
-              <Layers className="w-6 h-6 text-primary-foreground" />
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Materialien
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Die Tube besteht aus Karton-Alu-Verbund, die Deckel aus PE und der Strohhalm sowie Stopfen aus PP. Alle Komponenten sind lebensmittelecht. Alle Materialien wurden nach EU-Standards getestet, Testunterlagen liegen vor.
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
