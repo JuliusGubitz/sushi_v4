@@ -29,7 +29,17 @@ const PushUpTube3D = dynamic(
 // Default values for reset
 const DEFAULT_ROTATION = { x: 0, y: 180, z: 0 };
 const DEFAULT_TEXTURE_OFFSET = 50;
-const DEFAULT_TUBE_COLOR = "#1a1a1a";
+const DEFAULT_TUBE_COLOR = "#f5f5f0";
+const TUBE_COLOR_PRESETS = [
+  { color: "#ffffff", label: "Weiß" },
+  { color: "#f5f5f0", label: "Cremeweiß" },
+  { color: "#1a1a1a", label: "Schwarz" },
+  { color: "#3b3b3b", label: "Dunkelgrau" },
+  { color: "#c4a35a", label: "Gold" },
+  { color: "#c0c0c0", label: "Silber" },
+  { color: "#8b4513", label: "Braun" },
+  { color: "#1e3a5f", label: "Dunkelblau" },
+];
 const DEFAULT_ACTIVE_TAB = "3d";
 
 export default function CustomizerPage() {
@@ -118,8 +128,12 @@ export default function CustomizerPage() {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file && (file.type === "image/png" || file.type === "image/jpeg")) {
-        readFileAsDataUrl(file, setUploadedImage);
+        setUploadedImage(null);
+        requestAnimationFrame(() => {
+          readFileAsDataUrl(file, setUploadedImage);
+        });
       }
+      e.target.value = "";
     },
     [readFileAsDataUrl]
   );
@@ -274,6 +288,7 @@ export default function CustomizerPage() {
       </header>
 
       <main className="pt-[4.5rem] h-screen flex bg-background overflow-hidden">
+        <h1 className="sr-only">Push Up Sushi Konfigurator – Design selbst gestalten</h1>
         {/* Left Sidebar - Controls */}
         <aside className="w-80 border-r border-border bg-card overflow-y-auto flex-shrink-0 h-full">
           <div className="p-6 space-y-6">
@@ -304,6 +319,44 @@ export default function CustomizerPage() {
                 </label>
               </div>
 
+            </div>
+
+            {/* Tube Color */}
+            <div>
+              <h3 className="font-semibold text-foreground mb-4">Tube-Farbe</h3>
+              <div className="grid grid-cols-4 gap-2">
+                {TUBE_COLOR_PRESETS.map((preset) => (
+                  <button
+                    key={preset.color}
+                    onClick={() => setTubeColor(preset.color)}
+                    className={`group relative w-full aspect-square rounded-lg border-2 transition-all ${
+                      tubeColor === preset.color
+                        ? "border-accent ring-2 ring-accent/30 scale-105"
+                        : "border-border hover:border-muted-foreground"
+                    }`}
+                    style={{ backgroundColor: preset.color }}
+                    title={preset.label}
+                  >
+                    {tubeColor === preset.color && (
+                      <span className={`absolute inset-0 flex items-center justify-center text-xs font-bold ${
+                        preset.color === "#ffffff" || preset.color === "#f5f5f0" || preset.color === "#c0c0c0"
+                          ? "text-foreground"
+                          : "text-white"
+                      }`}>✓</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <label className="text-xs text-muted-foreground">Eigene Farbe:</label>
+                <input
+                  type="color"
+                  value={tubeColor}
+                  onChange={(e) => setTubeColor(e.target.value)}
+                  className="w-8 h-8 rounded cursor-pointer border border-border"
+                />
+                <span className="text-xs font-mono text-muted-foreground">{tubeColor}</span>
+              </div>
             </div>
 
             {/* Customization Section */}
@@ -457,7 +510,7 @@ export default function CustomizerPage() {
         </div>
 
         {/* Right Sidebar - Info */}
-        <aside className="w-72 border-l border-border bg-card overflow-y-auto flex-shrink-0 h-full">
+        <aside className="w-80 border-l border-border bg-card overflow-y-auto flex-shrink-0 h-full">
           <div className="p-6 space-y-6">
             {/* Design Maße */}
             <Card>

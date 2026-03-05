@@ -29,6 +29,7 @@ export function Canvas2DEditor({ width, height, onCanvasChange, uploadedImage }:
   const [resizing, setResizing] = useState(false);
   const [resizeCorner, setResizeCorner] = useState<string | null>(null);
   const [resizeStart, setResizeStart] = useState({ x: 0, y: 0, width: 0, height: 0 });
+  const addedUploadRef = useRef<string | null>(null);
 
   const CANVAS_WIDTH = 628;
   const CANVAS_HEIGHT = 880;
@@ -49,13 +50,18 @@ export function Canvas2DEditor({ width, height, onCanvasChange, uploadedImage }:
     [CANVAS_WIDTH, CANVAS_HEIGHT]
   );
 
-  // Add uploaded image from sidebar to canvas - enthalten, zentriert
+  // Add uploaded image from sidebar to canvas
   useEffect(() => {
-    if (uploadedImage && images.length === 0) {
+    if (!uploadedImage) {
+      addedUploadRef.current = null;
+      return;
+    }
+    if (uploadedImage !== addedUploadRef.current) {
+      addedUploadRef.current = uploadedImage;
       const img = new Image();
       img.onload = () => {
         const { scaledWidth, scaledHeight, x, y } = computeImagePlacement(img.width, img.height);
-        setImages([{
+        setImages(prev => [...prev, {
           img,
           x,
           y,
@@ -66,7 +72,7 @@ export function Canvas2DEditor({ width, height, onCanvasChange, uploadedImage }:
       };
       img.src = uploadedImage;
     }
-  }, [uploadedImage, images.length, computeImagePlacement]);
+  }, [uploadedImage, computeImagePlacement]);
 
   // Export a clean texture for 3D (no grid, no selection UI)
   const exportCleanTexture = useCallback(() => {
@@ -76,8 +82,7 @@ export function Canvas2DEditor({ width, height, onCanvasChange, uploadedImage }:
     const ctx = offscreen.getContext("2d");
     if (!ctx) return;
 
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     images.forEach((item) => {
       ctx.save();

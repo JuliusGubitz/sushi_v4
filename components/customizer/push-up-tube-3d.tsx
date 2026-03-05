@@ -77,18 +77,43 @@ function TubeModel({ textureUrl, rotation, textureOffset = 0, tubeColor = "#1a1a
 
   return (
     <group ref={groupRef}>
-      {/* Main tube - closed solid cylinder with texture on outside */}
-      {/* Rotate so texture seam is behind the straw (at X-positive) */}
+      {/* Base tube color layer */}
       <mesh rotation={[0, -Math.PI / 2, 0]}>
-        <cylinderGeometry args={[tubeRadius, tubeRadius, tubeHeight, 128, 1, false]} />
-        <meshStandardMaterial 
-          map={texture}
-          color={texture ? "#ffffff" : tubeColor}
+        <cylinderGeometry args={[tubeRadius * 0.999, tubeRadius * 0.999, tubeHeight, 128, 1, false]} />
+        <meshStandardMaterial
+          color={tubeColor}
           side={THREE.FrontSide}
           roughness={0.6}
           metalness={0.05}
         />
       </mesh>
+      {/* Texture layer on top (transparent areas reveal tube color) */}
+      {texture && (
+        <mesh rotation={[0, -Math.PI / 2, 0]}>
+          <cylinderGeometry args={[tubeRadius, tubeRadius, tubeHeight, 128, 1, false]} />
+          <meshStandardMaterial
+            map={texture}
+            color="#ffffff"
+            transparent
+            alphaTest={0.01}
+            side={THREE.DoubleSide}
+            roughness={0.6}
+            metalness={0.05}
+          />
+        </mesh>
+      )}
+      {/* Fallback: no texture, just tube color */}
+      {!texture && (
+        <mesh rotation={[0, -Math.PI / 2, 0]}>
+          <cylinderGeometry args={[tubeRadius, tubeRadius, tubeHeight, 128, 1, false]} />
+          <meshStandardMaterial
+            color={tubeColor}
+            side={THREE.FrontSide}
+            roughness={0.6}
+            metalness={0.05}
+          />
+        </mesh>
+      )}
 
       {/* Top cap */}
       <group position={[0, tubeHeight / 2, 0]}>
@@ -118,14 +143,13 @@ function TubeModel({ textureUrl, rotation, textureOffset = 0, tubeColor = "#1a1a
       <group position={[tubeRadius + 0.003 + strawRadius, 0, 0]}>
         <mesh>
           <cylinderGeometry args={[strawRadius, strawRadius, strawHeight, 32]} />
-          <meshPhysicalMaterial 
-            color="#e8e8e8"
+          <meshStandardMaterial 
+            color="#ffffff"
             transparent
-            opacity={0.55}
-            roughness={0.15}
-            transmission={0.5}
-            thickness={1}
-            clearcoat={0.3}
+            opacity={0.25}
+            roughness={0.1}
+            metalness={0}
+            depthWrite={false}
           />
         </mesh>
         
