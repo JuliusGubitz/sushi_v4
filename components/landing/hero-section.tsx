@@ -5,13 +5,13 @@ import { ArrowRight } from "lucide-react";
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-foreground text-primary-foreground overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-white text-foreground overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, #09090b 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
         />
@@ -20,13 +20,13 @@ export function HeroSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div className="text-center lg:text-left">
-            <p className="text-sm font-medium tracking-widest uppercase text-primary-foreground/60 mb-6">
+            <p className="text-sm font-medium tracking-widest uppercase text-muted-foreground mb-6">
               Premium Verpackungslösung
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-balance leading-tight text-foreground">
               Push Up Sushi: Ihr Design. Unsere Verpackung.
             </h1>
-            <p className="mt-8 text-lg lg:text-xl text-primary-foreground/80 leading-relaxed max-w-xl mx-auto lg:mx-0 text-pretty">
+            <p className="mt-8 text-lg lg:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0 text-pretty">
               Die innovative Sushi-Verpackung für Ihre Marke. Vollständig
               individualisierbar.
             </p>
@@ -44,7 +44,7 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 w-full sm:w-auto bg-transparent"
+                className="border-border text-foreground hover:bg-muted w-full sm:w-auto bg-transparent"
                 asChild
               >
                 <Link href="/anfrage">Anfrage senden</Link>
