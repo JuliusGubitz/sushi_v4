@@ -115,7 +115,6 @@ export default function AnfragePage() {
     formData.vorname.trim() !== "" &&
     formData.nachname.trim() !== "" &&
     formData.email.trim() !== "" &&
-    formData.telefon.trim() !== "" &&
     formData.nachricht.trim() !== "" &&
     formData.datenschutz;
 
@@ -195,7 +194,7 @@ export default function AnfragePage() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="telefon">
-                        Telefon <span className="text-destructive">*</span>
+                        Telefon
                       </Label>
                       <Input
                         id="telefon"

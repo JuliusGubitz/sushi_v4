@@ -19,7 +19,7 @@ export function Header() {
               alt="Pop Up Su-Shi"
               width={320}
               height={320}
-              className="h-36 w-auto"
+              className="h-12 w-auto"
               priority
               unoptimized
             />

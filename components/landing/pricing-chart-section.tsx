@@ -59,7 +59,7 @@ export function PricingChartSection() {
                 <YAxis
                   domain={[0.5, 1.8]}
                   ticks={[0.5, 0.75, 1.0, 1.25, 1.5, 1.75]}
-                  tickFormatter={(v: number) => `${v.toFixed(2).replace(".", ",")} €`}
+                  tickFormatter={(v: number) => (v < 1.25 ? "-- €" : `${v.toFixed(2).replace(".", ",")} €`)}
                   stroke="rgba(255,255,255,0.4)"
                   tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 12 }}
                   axisLine={{ stroke: "rgba(255,255,255,0.15)" }}
