@@ -15,7 +15,7 @@ export function Header() {
         <div className="flex lg:flex-1">
           <Link href="/" className="flex items-center">
             <Image
-              src="/logo.png"
+              src="/logo.png?v=2"
               alt="Pop Up Su-Shi"
               width={320}
               height={320}
